@@ -110,18 +110,11 @@ internal class DisplayMessageApp
             }
         }
 
-        Console.WriteLine("=========> DIAGONAL DIFF <=========");
         op.PrintMatrix(mat);
         Console.WriteLine("\nDiagonal Difference = " + op.DiagonalDifference(mat));
-
-        Console.WriteLine("\n=========> SNAKE <=========");
         op.PrintSnake(mat);
-
-        Console.WriteLine("\n=========> TRANSPOSE <=========");
         op.Transpose(mat);
         op.PrintMatrix(mat);
-
-        Console.WriteLine("\n=========> SPIRAL <=========");
         op.PrintSpiral(mat);
     }
 }
