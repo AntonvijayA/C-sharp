@@ -1,0 +1,47 @@
+using System;
+interface IBonusEligible
+{
+    double CalculateBonus();
+}
+class ContractEmployee : IBonusEligible
+{
+    public string Name { get; set; }
+    public int CompletedProjects { get; set; }
+    public double BonusPerProject { get; set; } = 1000; 
+    public double CalculateBonus()
+    {
+        return CompletedProjects * BonusPerProject;
+    }
+}
+class RegularEmployee : IBonusEligible
+{
+    public string Name { get; set; }
+    public double BasicSalary { get; set; }
+    public int YearsOfExperience { get; set; }
+    public double BonusPercentagePerYear { get; set; } = 5; 
+    public double CalculateBonus()
+    {
+        return BasicSalary * YearsOfExperience * BonusPercentagePerYear / 100;
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        IBonusEligible contractEmp = new ContractEmployee
+        {
+            Name = "Alice",
+            CompletedProjects = 8,
+            BonusPerProject = 1200 
+        };
+        IBonusEligible regularEmp = new RegularEmployee
+        {
+            Name = "Bob",
+            BasicSalary = 50000,
+            YearsOfExperience = 6,
+            BonusPercentagePerYear = 10 
+        };
+        Console.WriteLine($"Contract Employee Bonus: {contractEmp.CalculateBonus():C}");
+        Console.WriteLine($"Regular Employee Bonus: {regularEmp.CalculateBonus():C}");
+    }
+}
