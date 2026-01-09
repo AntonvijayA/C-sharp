@@ -1,0 +1,63 @@
+using System;
+abstract class EmployeeBase
+{
+    protected int employeeId;
+    protected string employeeName;
+    public EmployeeBase(int id, string name)
+    {
+        employeeId = id;
+        employeeName = name;
+    }
+    public void DisplayEmployeeDetails()
+    {
+        Console.WriteLine($"Employee ID: {employeeId}");
+        Console.WriteLine($"Employee Name: {employeeName}");
+    }
+    public abstract double CalculateSalary();
+}
+class DailyWageEmployee : EmployeeBase
+{
+    public double DailyWage { get; set; }
+    public int DaysWorked { get; set; }
+    public DailyWageEmployee(int id, string name, double dailyWage, int daysWorked)
+        : base(id, name)
+    {
+        DailyWage = dailyWage;
+        DaysWorked = daysWorked;
+    }
+    public override double CalculateSalary()
+    {
+        return DailyWage * DaysWorked;
+    }
+}
+class SalariedEmployee : EmployeeBase
+{
+    public double BasicSalary { get; set; }
+    public double Allowance { get; set; }
+    public SalariedEmployee(int id, string name, double basicSalary, double allowance)
+        : base(id, name)
+    {
+        BasicSalary = basicSalary;
+        Allowance = allowance;
+    }
+    public override double CalculateSalary()
+    {
+        return BasicSalary + Allowance;
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        DailyWageEmployee dailyEmp = new DailyWageEmployee(id: 101, name: "John", dailyWage: 500, daysWorked: 22);
+        SalariedEmployee salariedEmp = new SalariedEmployee(id: 102, name: "Alice", basicSalary: 40000, allowance: 5000);
+        Console.WriteLine("Daily Wage Employee Details:");
+        dailyEmp.DisplayEmployeeDetails();
+        Console.WriteLine($"Salary: {dailyEmp.CalculateSalary():C}");
+        Console.WriteLine();
+
+        Console.WriteLine("Salaried Employee Details:");
+        salariedEmp.DisplayEmployeeDetails();
+        Console.WriteLine($"Salary: {salariedEmp.CalculateSalary():C}");
+    }
+}
